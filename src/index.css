@@ -1,13 +1,55 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-ExtraBold.eot');
+  src: url('./fonts/JetBrainsMono-ExtraBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/JetBrainsMono-ExtraBold.woff2') format('woff2'),
+    url('./fonts/JetBrainsMono-ExtraBold.woff') format('woff'),
+    url('./fonts/JetBrainsMono-ExtraBold.ttf') format('truetype'),
+    url('./fonts/JetBrainsMono-ExtraBold.svg#JetBrainsMono-ExtraBold')
+      format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-Regular.eot');
+  src: url('./fonts/JetBrainsMono-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('./fonts/JetBrainsMono-Regular.woff2') format('woff2'),
+    url('./fonts/JetBrainsMono-Regular.woff') format('woff'),
+    url('./fonts/JetBrainsMono-Regular.ttf') format('truetype'),
+    url('./fonts/JetBrainsMono-Regular.svg#JetBrainsMono-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  overflow: hidden;
+  font-size: 49px;
+}
+body {
+  list-style-type: none;
+}
+
+a,
+button {
+  all: unset;
+}
+
+h1 {
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1rem;
 }
