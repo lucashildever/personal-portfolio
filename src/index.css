@@ -1,13 +1,20 @@
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('./fonts/JetBrainsMono-ExtraBold.eot');
-  src: url('./fonts/JetBrainsMono-ExtraBold.eot?#iefix')
-      format('embedded-opentype'),
-    url('./fonts/JetBrainsMono-ExtraBold.woff2') format('woff2'),
-    url('./fonts/JetBrainsMono-ExtraBold.woff') format('woff'),
-    url('./fonts/JetBrainsMono-ExtraBold.ttf') format('truetype'),
-    url('./fonts/JetBrainsMono-ExtraBold.svg#JetBrainsMono-ExtraBold')
-      format('svg');
+  src: url('./fonts/JetBrainsMono-Light.woff2') format('woff2'),
+      url('./fonts/JetBrainsMono-Light.woff') format('woff'),
+      url('./fonts/JetBrainsMono-Light.ttf') format('truetype'),
+      url('./fonts/JetBrainsMono-Light.svg#JetBrainsMono-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-Bold.woff2') format('woff2'),
+      url('./fonts/JetBrainsMono-Bold.woff') format('woff'),
+      url('./fonts/JetBrainsMono-Bold.ttf') format('truetype'),
+      url('./fonts/JetBrainsMono-Bold.svg#JetBrainsMono-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -15,17 +22,26 @@
 
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('./fonts/JetBrainsMono-Regular.eot');
-  src: url('./fonts/JetBrainsMono-Regular.eot?#iefix')
-      format('embedded-opentype'),
-    url('./fonts/JetBrainsMono-Regular.woff2') format('woff2'),
-    url('./fonts/JetBrainsMono-Regular.woff') format('woff'),
-    url('./fonts/JetBrainsMono-Regular.ttf') format('truetype'),
-    url('./fonts/JetBrainsMono-Regular.svg#JetBrainsMono-Regular') format('svg');
+  src: url('./fonts/JetBrainsMono-Regular.woff2') format('woff2'),
+      url('./fonts/JetBrainsMono-Regular.woff') format('woff'),
+      url('./fonts/JetBrainsMono-Regular.ttf') format('truetype'),
+      url('./fonts/JetBrainsMono-Regular.svg#JetBrainsMono-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/JetBrainsMono-ExtraBold.woff2') format('woff2'),
+      url('./fonts/JetBrainsMono-ExtraBold.woff') format('woff'),
+      url('./fonts/JetBrainsMono-ExtraBold.ttf') format('truetype'),
+      url('./fonts/JetBrainsMono-ExtraBold.svg#JetBrainsMono-ExtraBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 *,
 *:after,
@@ -35,7 +51,6 @@
   border: 0;
   box-sizing: border-box;
   text-decoration: none;
-  overflow: hidden;
   font-size: 49px;
 }
 body {
@@ -51,7 +66,16 @@ h1 {
   font-family: JetBrains Mono;
   font-style: normal;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 75px;
+}
+
+h3 {
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.4rem;
   color: #fff;
 }
 
@@ -59,14 +83,6 @@ p {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 300;
-  font-size: 0.45rem;
-  color: #fff;
-}
-
-li {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 0.45rem;
+  font-size: 0.38rem;
   color: #fff;
 }
