@@ -52,9 +52,14 @@
   box-sizing: border-box;
   text-decoration: none;
   font-size: 49px;
+  overflow-x: hidden;
 }
 body {
   list-style-type: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
 }
 
 a,
@@ -71,15 +76,23 @@ h1 {
   line-height: 75px;
 }
 
+h2 {
+  font-family: JetBrains Mono;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.5rem;
+  color: #fff;
+}
+
 h3 {
   font-family: JetBrains Mono;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 0.4rem;
   color: #fff;
 }
 
-p {
+p, label {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 300;

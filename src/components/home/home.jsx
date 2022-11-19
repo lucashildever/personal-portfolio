@@ -1,57 +1,60 @@
 import React from "react";
 import styled from "styled-components";
 
-import Svg from "../svg/Svg";
-import About from "../section/about/about";
-import Section from "../section/section";
-import Projects from "../section/projects-section/projects-section";
-import Contact from "../section/contact/contact";
-import Menu from "../menu/menu";
+import Svg from "./svg/Svg";
+import Hero from "./sections/hero/hero";
+import About from "./sections/about/about";
+import Projects from "./sections/projects-section/projects-section";
+import Contact from "./sections/contact/contact";
+import InfoBox from "./info-box/info-box";
+
+// import { useSelector } from 'react-redux'
+// import { selectSection } from "../../reducers/sectionReducer";
+//import { setHome, setAbout, setProjects, setContact, selectSection } from "../../reducers/sectionReducer";
 
 function Home() {
 
+    // const selector = useSelector(selectSection)
+    // // const dispatch = useDispatch()
+
+    // useEffect(() => {
+    //     console.log(selector)
+    // }, [selector])
+
+    // useEffect(() => {
+    //     let obsFunc = entries => {
+    //         entries.forEach((entry) => {
+    //             console.log(entry)
+    //         });
+    //       };
+
+    //     let observer = new IntersectionObserver(obsFunc, {
+    //         root: null,
+    //         rootMargin: '0px',
+    //         threshold: 1.0
+    //     });
+
+    //     observer.observe(document.getElementById("contact-sec"));
+    //   });
+
     return (
         <>
-            <Svg/>
-            <Menu />
-            <Hero>
-                <h3>Home</h3>
-                <div>
-                    <h1>LUCAS<br/>HILDEVER</h1>
-                    <p>I'm a Web Developer & <br/>Designer based in Brazil.</p>
-                </div>
-            </Hero>
-            <Section sectionTitle="About">
+            <InfoBox>
+                <p>Infobox preencher com conteúdo <br/>baseado no estado</p>
+            </InfoBox>
+            <Svg />
+            <HomeSections>
+                <Hero />
                 <About />
-            </Section>
-            <Section sectionTitle="Projects">
                 <Projects />
-            </Section>
-            <Section sectionTitle="Contact">
                 <Contact />
-            </Section>
+            </HomeSections>
         </>
     )
 }
 
-const Hero = styled.section`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    
-    h3 {
-        position: fixed;
-        top: 45px;
-        padding-right: 2.3vw;
-    }
-    div {
-        width: 50vw;
-    }
-
+const HomeSections = styled.main`
+    margin-left: 50vw;
 `;
-
-
 
 export default Home;
