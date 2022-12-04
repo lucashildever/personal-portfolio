@@ -52,7 +52,7 @@ const Bmenu = styled.div`
     cursor: pointer;
     opacity: 0.6;
     width: 25px;
-    z-index: 2;
+    z-index: 3;
 
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@ const Bmenu = styled.div`
 const OpenMenu = styled.div`
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     right: 10px;
     top: 10px;

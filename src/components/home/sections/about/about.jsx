@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setSection } from "../../../../reducers/sectionReducer"
+
+import profile from "./profile.png"
+
 
 function About() {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        let obsFunc = entries => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting) 
+                        dispatch(setSection("about"))
+            });
+        };
+
+        let observer = new IntersectionObserver(obsFunc, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        });
+
+        observer.observe(document.getElementById("about-section"));
+    });
+
     return (
         <AboutStyled>
-            <div className="aboutContent">
-                {/* <img 
-                    src='https://drive.google.com/uc?export=view&id=19iLOswccrqdyVh-nwRL756MH14BewTuR' 
-                    alt="profile" 
-                /> */}
-                <div className="div-img"></div>
+            <div id="about-section" className="aboutContent">
+                <div className="div-img"><img src={profile} alt="profile"/></div>
                 <p>
                     Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
                     <br/><br/>
@@ -26,6 +47,10 @@ const AboutStyled = styled.section`
     flex-direction: column;
     justify-content: center;
 
+
+    
+
+
     div.aboutContent {
         width: 30vw;
         display: flex;
@@ -37,43 +62,19 @@ const AboutStyled = styled.section`
         }
     }
     
-    /* 
-    
-    align-items: flex-end;
-    
-    */
-
-    /* height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-
-    div.aboutContent {
-        
-        max-width: 30vw;
-        margin-right: 8vw;
-
-        
-    } */
-
-    /* 
-    div > img {
-        height: 100px;
-        border-radius: 50%;
-        margin-bottom: 50px;
-    }    */
     div div.div-img {
         height: 100px;
         width: 100px;
         border-radius: 50%;
         margin-bottom: 50px;
-        background-color: grey;
+        overflow: hidden;
+        
+        img {
+            height: 100px;
+            width: 100px;
+        }
 
     }
-    /*
-
-     */
 `;
 
 export default About;

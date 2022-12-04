@@ -17,6 +17,7 @@ function Layout() {
 
 const MyLayout = styled.div`
     background-color: #181818;
+    min-height: 100vh;
 `;
 
 export default Layout;

@@ -1,10 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setProjData, selectProjData } from "../../reducers/projectsDataReducer";
+
+import { setPage, selectPage } from "../../reducers/pageReducer";
+
+import ProjDiv from "../proj-div/proj-div";
+
+// router imports
+import { useLocation } from "react-router-dom";
+
 
 
 function AllProjectsPage() {
+
+    const location = useLocation()
+    
+    const projectData = useSelector(selectProjData)
+
+    const pageSelector = useSelector(selectPage)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        fetch('https://magenta-soap-production.up.railway.app/')
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setProjData(data.data.allProjects))
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        if (location.pathname === "/projects") {
+            dispatch(setPage("projects"))
+        }
+    }, [location])
+
+    useEffect(() => {
+        console.log(pageSelector)
+    }, [pageSelector])
+
     return(
         <PageContent>
             <div className="page-content">
@@ -14,16 +51,17 @@ function AllProjectsPage() {
                 </PathLinks>
                 <h2>Projecs</h2>
                 <AllProjs>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    {projectData
+                        .map((item, index) => 
+                                <ProjDiv 
+                                    title={item.title} 
+                                    key={index} 
+                                    image={item.img} 
+                                    projType={item.projType}
+                                    linkTo={index}
+                                />
+                            )
+                    }
                 </AllProjs>
             </div>
         </PageContent>

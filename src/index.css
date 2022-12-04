@@ -53,7 +53,9 @@
   text-decoration: none;
   font-size: 49px;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
+
 body {
   list-style-type: none;
 }
@@ -92,10 +94,35 @@ h3 {
   color: #fff;
 }
 
+h4 {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.35rem;
+  color: #fff;
+}
+
+h5 {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 0.32rem;
+  color: #fff;
+}
+
 p, label {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 300;
   font-size: 0.38rem;
   color: #fff;
+}
+
+li {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.38rem;
+  color: #fff;
+  height: 27px;
 }

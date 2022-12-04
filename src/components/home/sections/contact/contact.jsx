@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setSection } from "../../../../reducers/sectionReducer"
 
 function Contact() {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        let obsFunc = entries => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting) 
+                        dispatch(setSection("contact"))
+            });
+        };
+
+        let observer = new IntersectionObserver(obsFunc, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        });
+
+        observer.observe(document.getElementById("contact-form"));
+    });
+
     return (
         <StyledContact>
             <h2>Working on a project? <br/>Let’s have a coffe!</h2>

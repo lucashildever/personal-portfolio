@@ -1,14 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setProjData, selectProjData } from "../../../../reducers/projectsDataReducer";
+import { setSection } from "../../../../reducers/sectionReducer";
+
+import ProjDiv from "../../../proj-div/proj-div";
 
 function ProjectsSection() {
+
+    const projectData = useSelector(selectProjData)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        let obsFunc = entries => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting) 
+                        dispatch(setSection("projects"))
+            });
+        };
+
+        let observer = new IntersectionObserver(obsFunc, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        });
+
+        observer.observe(document.getElementById("projects-section"));
+    });
+
+    useEffect(() => {
+        fetch('https://magenta-soap-production.up.railway.app/')
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setProjData(data.data.allProjects))
+            })
+            .catch(err => console.log(err))
+    }, [])
+
     return(
         <ProjSec>
-            <div className="projSec">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <div id="projects-section" className="projSec">
+                {projectData
+                    .filter((item, index) => index < 4)
+                    .map((item, index) => 
+                            <ProjDiv 
+                                title={item.title} 
+                                key={index} 
+                                image={item.img} 
+                                projType={item.projType}
+                                linkTo={index}
+                            />
+                        )
+                }
             </div>
         </ProjSec>
     )
@@ -26,15 +69,13 @@ const ProjSec = styled.div`
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 15px;
         grid-row-gap: 15px;
-        height: 350px;
-        width: 350px;
-
+        height: 400px;
+        width: 400px;
 
         div {
             background-color: #acacac;
         }
     }
-
 `;
 
 export default ProjectsSection;

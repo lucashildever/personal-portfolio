@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+
+// redux imports
+import { useSelector, useDispatch } from "react-redux";
+import { selectSection } from "../../reducers/sectionReducer";
+import { setPage, selectPage } from "../../reducers/pageReducer";
+
+// router imports
+import { useLocation } from "react-router-dom";
 
 import Svg from "./svg/Svg";
 import Hero from "./sections/hero/hero";
@@ -7,43 +15,40 @@ import About from "./sections/about/about";
 import Projects from "./sections/projects-section/projects-section";
 import Contact from "./sections/contact/contact";
 import InfoBox from "./info-box/info-box";
-
-// import { useSelector } from 'react-redux'
-// import { selectSection } from "../../reducers/sectionReducer";
-//import { setHome, setAbout, setProjects, setContact, selectSection } from "../../reducers/sectionReducer";
+import Nav from "./nav/nav";
+import BoxContent from "./info-box/box-content/box-content";
 
 function Home() {
 
-    // const selector = useSelector(selectSection)
-    // // const dispatch = useDispatch()
+    const location = useLocation()
+    const sectionSelector = useSelector(selectSection)
+    const pageSelector = useSelector(selectPage)
+    const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     console.log(selector)
-    // }, [selector])
+    useEffect(() => {
+        if (location.pathname === "/") {
+            dispatch(setPage("home"))
+        }
+    }, [location])
 
-    // useEffect(() => {
-    //     let obsFunc = entries => {
-    //         entries.forEach((entry) => {
-    //             console.log(entry)
-    //         });
-    //       };
-
-    //     let observer = new IntersectionObserver(obsFunc, {
-    //         root: null,
-    //         rootMargin: '0px',
-    //         threshold: 1.0
-    //     });
-
-    //     observer.observe(document.getElementById("contact-sec"));
-    //   });
+    useEffect(() => {
+        console.log(pageSelector)
+    }, [pageSelector])
 
     return (
         <>
-            <InfoBox>
-                <p>Infobox preencher com conteúdo <br/>baseado no estado</p>
+            <Nav />
+            <InfoBox deactive={sectionSelector === "about" ? false : true}>
+                <BoxContent section="about"/>
+            </InfoBox>
+            <InfoBox deactive={sectionSelector === "projects" ? false : true}>
+                <BoxContent section="projects"/>
+            </InfoBox>
+            <InfoBox deactive={sectionSelector === "contact" ? false : true}>
+                <BoxContent section="contact"/>
             </InfoBox>
             <Svg />
-            <HomeSections>
+            <HomeSections > {/* className={pageSelector === "home" ? "" : "home-deactive"} USAR NAVIGATE PARA NÃO RECARREGAR A PÁGINA */}
                 <Hero />
                 <About />
                 <Projects />
@@ -55,6 +60,14 @@ function Home() {
 
 const HomeSections = styled.main`
     margin-left: 50vw;
+
+    transition: 0.3s;
+    
+    /* &.home-deactive {
+        transition: 0.3s;
+        opacity: 0;
+        transform: translateY(10px);
+    } */
 `;
 
 export default Home;
