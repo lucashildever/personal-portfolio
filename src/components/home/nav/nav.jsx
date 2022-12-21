@@ -1,31 +1,30 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { selectSection } from "../../../reducers/sectionReducer"
 
-//import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectSection } from "../../../reducers/sectionReducer";
+import { selectMode } from "../../../reducers/modeReducer";
+
 
 function Nav() {
 
-    // const navigate = useNavigate();
-    // const location = useLocation();
-
-    const selector = useSelector(selectSection)
+    const currentSection = useSelector(selectSection);
+    const mode = useSelector(selectMode)
 
     return(
-        <StyledNav>
+        <StyledNav className={mode ? "light" : ""}>
             <ul>
                 <a href="#hero-section">
-                    <li className={selector === "hero" ? "nav-active" : ""}>Home</li>
+                    <li className={currentSection === "hero" ? "nav-active" : ""}>Home</li>
                 </a>
                 <a href="#about-section">
-                    <li className={selector === "about" ? "nav-active" : ""}>About</li>
+                    <li className={currentSection === "about" ? "nav-active" : ""}>About</li>
                 </a>
                 <a href="#projects-section">
-                    <li className={selector === "projects" ? "nav-active" : ""}>Projects</li>
+                    <li className={currentSection === "projects" ? "nav-active" : ""}>Projects</li>
                 </a>
                 <a href="#contact-form">
-                    <li className={selector === "contact" ? "nav-active" : ""}>Contact</li>
+                    <li className={currentSection === "contact" ? "nav-active" : ""}>Contact</li>
                 </a>
             </ul>
         </StyledNav>
@@ -45,7 +44,6 @@ const StyledNav = styled.div`
         
         a:hover {
             li {
-
                 opacity: 1;
             }
         }
@@ -54,13 +52,19 @@ const StyledNav = styled.div`
             cursor: pointer;
             li {
                 transition: 0.6s;
-                opacity: 0.6;
+                opacity: 0.7;
             }
         }
 
         a li.nav-active {
             margin-bottom: calc(100vh - 155px);
             opacity: 1;
+        }
+    }
+
+    &.light {
+        ul a li {
+            color: #232323;
         }
     }
 `;

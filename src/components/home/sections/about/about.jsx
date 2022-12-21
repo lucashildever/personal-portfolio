@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { setSection } from "../../../../reducers/sectionReducer"
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSection } from "../../../../reducers/sectionReducer";
+import { selectMode } from "../../../../reducers/modeReducer";
 
 import profile from "./profile.png"
 
@@ -9,6 +11,7 @@ import profile from "./profile.png"
 function About() {
 
     const dispatch = useDispatch()
+    const mode = useSelector(selectMode)
 
     useEffect(() => {
         let obsFunc = entries => {
@@ -31,10 +34,8 @@ function About() {
         <AboutStyled>
             <div id="about-section" className="aboutContent">
                 <div className="div-img"><img src={profile} alt="profile"/></div>
-                <p>
-                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-                    <br/><br/>
-                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
+                <p className={mode ? "light" : ""}>
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint ullamco est sit deserunt ullamco est.
                 </p>
             </div>
         </AboutStyled>
@@ -47,10 +48,6 @@ const AboutStyled = styled.section`
     flex-direction: column;
     justify-content: center;
 
-
-    
-
-
     div.aboutContent {
         width: 30vw;
         display: flex;
@@ -59,12 +56,16 @@ const AboutStyled = styled.section`
 
         p {
             text-align: justify;
+
+            &.light {
+                color: #181818;
+            }
         }
     }
     
     div div.div-img {
-        height: 100px;
-        width: 100px;
+        height: 85px;
+        width: 85px;
         border-radius: 50%;
         margin-bottom: 50px;
         overflow: hidden;
@@ -72,6 +73,7 @@ const AboutStyled = styled.section`
         img {
             height: 100px;
             width: 100px;
+            filter: grayscale(100%);
         }
 
     }

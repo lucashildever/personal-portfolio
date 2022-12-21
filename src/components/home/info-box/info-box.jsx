@@ -33,7 +33,7 @@ const Box = styled.div`
 
     & > div {
         padding: 20px;
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(8px);
     }
 

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useSelector } from "react-redux";
+import { selectMode } from "../../reducers/modeReducer";
+
 function Menu() {
     
-    const [menu, setMenu] = useState(false)
+    const [menu, setMenu] = useState(false);
+
+    const mode = useSelector(selectMode);
 
     return (
         <>
             <Bmenu 
                 onClick={() => setMenu(!menu)}
-                className={menu ? "b-menu-x" : ""}
+                className={`${menu ? "b-menu-x" : ""} ${mode ? "light" : ""}`}
             >
                 <div></div>
                 <div></div>
@@ -61,7 +66,7 @@ const Bmenu = styled.div`
     div {
         height: 4px;
         width: 15px;
-        background-color: #ffffff;
+        background-color: #D9D9D9;
         border-radius: 1px;
         transition: 0.6s ease-out;
     }
@@ -90,6 +95,10 @@ const Bmenu = styled.div`
         div:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
+    }
+
+    &.light div {
+        background-color: #232323;
     }
 `;
 

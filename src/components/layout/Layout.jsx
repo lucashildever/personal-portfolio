@@ -2,22 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 
-import IconsMenu from "../icons-menu/icons-menu";
+import { useSelector } from "react-redux";
+import { selectMode } from "../../reducers/modeReducer";
 
-
+import Icons from "../icons/icons";
 
 function Layout() {
-    return(
-    <MyLayout>
-      <IconsMenu />
-      <Outlet />
-    </MyLayout>
-    )
+
+  const mode = useSelector(selectMode)
+
+  return(
+  <MyLayout className={mode ? "light" : "dark"} >
+    <Icons />
+    <Outlet />
+  </MyLayout>
+  )
 }
 
 const MyLayout = styled.div`
-    background-color: #181818;
     min-height: 100vh;
+    
+    &.light {
+      background-color: #D9D9D9;
+    }
+    &.dark {
+      background-color: #181818;
+    }
 `;
 
 export default Layout;

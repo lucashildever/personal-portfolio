@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { setSection } from "../../../../reducers/sectionReducer"
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSection } from "../../../../reducers/sectionReducer";
+import { selectMode } from "../../../../reducers/modeReducer";
+
+import Circle from "../circle"
 
 function Contact() {
 
     const dispatch = useDispatch()
+    const mode = useSelector(selectMode)
 
     useEffect(() => {
         let obsFunc = entries => {
             entries.forEach((entry) => {
-                if(entry.isIntersecting) 
+                if(entry.isIntersecting)
                         dispatch(setSection("contact"))
             });
         };
@@ -26,17 +31,28 @@ function Contact() {
 
     return (
         <StyledContact>
-            <h2>Working on a project? <br/>Let’s have a coffe!</h2>
-            <ContactForm id="contact-form">
-                <label htmlFor="fname">Name</label>
-                <input type="text" id="fname" name="fname"/>
-                <label htmlFor="femail">Email</label>
-                <input type="text" id="femail" name="femail"/>
-                <label htmlFor="fmessage">Message</label>
-                <textarea id="fmessage" name="fmessage"/>
-            </ContactForm>
-            <div>
-                <button>Send <ArrowSvg /></button>
+            <div className="form-banner"><Circle /></div>
+            <div className={`form-content ${mode ? "light" : ""}`}>
+                <h2>Working on a project? <br/>Let’s have a coffe!</h2>
+                <ContactForm id="contact-form">
+
+                    <div className="form-item">
+                        <input type="text" id="f-name" name="f-name" required/>
+                        <label className="name-label" htmlFor="f-name">Name</label>
+                    </div>
+                    <div className="form-item">
+                        <input type="text" id="f-email" name="f-email" required/>
+                        <label className="email-label" htmlFor="f-email">Email</label>
+                    </div>
+                    <div className="form-item">
+                        <input type="textarea" id="f-message" name="f-message" required/>
+                        <label className="email-label" htmlFor="f-email">Message</label>
+                    </div>
+
+                </ContactForm>
+                <div className="send-button">
+                    <button>Send <ArrowSvg /></button>
+                </div>
             </div>
         </StyledContact>
     )
@@ -57,83 +73,103 @@ const StyledContact = styled.div`
     height: 100vh;
     width: 400px;
 
-    h2 {
-        margin-bottom: 35px;
+    div.form-banner {
+        height: 70px;
+        width: 400px;
+        overflow: hidden;
+
+        & > div {
+            transform: translate(240px, -25px);
+        }
     }
 
-    input {
-        background-color: none;
+    div.form-content {
+        background-color: #D9D9D9;
+        padding: 25px;
+
+        h2 {
+            color: #232323;
+        }
     }
 
-    div {
+    div.light {
+        background-color: #232323;
+
+        h2 {
+            color: #D9D9D9;
+        }
+
+        form {
+            div.form-item label {
+                color: #D9D9D9;
+            }
+            div.form-item input {
+                border-bottom: #D9D9D9 solid 2px;
+
+                &[type="text"], &[type="textarea"] {
+                    color: #D9D9D9;
+                }
+            }
+        }
+
+        div.send-button button {
+            color: #D9D9D9;
+        }
+    }
+
+    div.send-button {
         display: flex;
         justify-content: flex-end;
         padding-top: 10px;
         box-sizing: content-box;
 
-        
+
         button {
             cursor: pointer;
             font-family: 'JetBrains Mono';
             font-style: normal;
             font-weight: 400;
             font-size: 0.38rem;
-            color: white;
+            color: #232323;
         }
     }
 
 `;
 
 const ContactForm = styled.form`
-    display: grid;
-    grid-column-gap: 15px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1.2fr 1fr 1.2fr 3.5fr;
-    height: 280px;
-    
-    label {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 0.38rem;
-        color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
-        display: flex;
-        align-items: center;
+    div.form-item {
+        position: relative;
 
-        &[for="fname"] {
-            grid-column-start: 1;
-            grid-column-end: 2;
+        label {
+            position: absolute;
+            color: #232323;
+            transition: 0.4s;
+            transform: translate(-348px, 30px);
         }
-    }
 
-    input {
-        background-color: #515151;
-        color: white;
-        font-size: 0.38rem;
-
-        &[id="fname"] {
-            grid-column-start: 1;
-            grid-column-end: 2;
-            grid-row-start: 2;
+        input:focus + label, input:valid + label {
+            transition: 0.4s;
+            transform: translate(-348px, 5px);
+            opacity: 0.6;
         }
-    }
-    
-    textarea {
-        color: white;
-        font-size: 0.38rem;
-        background-color: #515151;
-        
-        grid-column-start: 1;
-        grid-column-end: 3;
-        resize: none;
 
-    }
+        input {
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-bottom: #232323c0 solid 2px;
 
-    input, textarea {
-        padding: 10px;
+            &[type="text"], &[type="textarea"] {
+                min-width: 100%;
+                font-size: 0.38rem;
+                padding: 4px;
+                color: #232323;
+            }
+        } 
     }
-
 `;
 
 export default Contact;

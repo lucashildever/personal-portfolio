@@ -69,20 +69,11 @@ button {
   all: unset;
 }
 
-h1 {
-  font-family: JetBrains Mono;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: #fff;
-  line-height: 75px;
-}
-
 h2 {
   font-family: JetBrains Mono;
   font-style: normal;
   font-weight: 600;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: #fff;
 }
 

@@ -4,12 +4,11 @@ import styled from "styled-components";
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
 import { selectSection } from "../../reducers/sectionReducer";
-import { setPage, selectPage } from "../../reducers/pageReducer";
+import { setPage } from "../../reducers/pageReducer";
 
 // router imports
 import { useLocation } from "react-router-dom";
 
-import Svg from "./svg/Svg";
 import Hero from "./sections/hero/hero";
 import About from "./sections/about/about";
 import Projects from "./sections/projects-section/projects-section";
@@ -22,7 +21,6 @@ function Home() {
 
     const location = useLocation()
     const sectionSelector = useSelector(selectSection)
-    const pageSelector = useSelector(selectPage)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -30,10 +28,6 @@ function Home() {
             dispatch(setPage("home"))
         }
     }, [location])
-
-    useEffect(() => {
-        console.log(pageSelector)
-    }, [pageSelector])
 
     return (
         <>
@@ -47,8 +41,7 @@ function Home() {
             <InfoBox deactive={sectionSelector === "contact" ? false : true}>
                 <BoxContent section="contact"/>
             </InfoBox>
-            <Svg />
-            <HomeSections > {/* className={pageSelector === "home" ? "" : "home-deactive"} USAR NAVIGATE PARA NÃO RECARREGAR A PÁGINA */}
+            <HomeSections > 
                 <Hero />
                 <About />
                 <Projects />
@@ -59,15 +52,11 @@ function Home() {
 }
 
 const HomeSections = styled.main`
-    margin-left: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     transition: 0.3s;
-    
-    /* &.home-deactive {
-        transition: 0.3s;
-        opacity: 0;
-        transform: translateY(10px);
-    } */
 `;
 
 export default Home;

@@ -1,19 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Arrow, SecondArrow } from "../../../icons/icons"
+import { Arrow, SecondArrow } from "../../../arrow-icons/icons";
 
 const BoxContent = ({ section }) => {
 
     switch (section) {
         case 'about':
             return (
-                <AboutBox>
-                    <p className="box-txt">Check out my cv for more <br/>information about me.</p>
-                    <a href="/" target='_blank' rel="noopener noreferrer">
-                        <p className="box-btn">view cv</p>
-                        <SecondArrow />
-                    </a>
+                <AboutBox href="/" target='_blank' rel="noopener noreferrer">
+                    <p className="box-txt">
+                        Check out my cv for more <br/> detailed information <SecondArrow />
+                    </p>
                 </AboutBox>
             )
         case 'projects':
@@ -55,25 +53,11 @@ const BoxContent = ({ section }) => {
 }
 
 const AboutBox = styled.div`
-    & > p, a > p {
+    cursor: pointer;
+    & > p {
         font-size: 0.32rem;
     }
 
-    & > a {
-        display: flex;
-        justify-content: flex-end;
-        cursor: pointer;
-        justify-content: center;
-        align-items: center;
-    }
-
-    p {
-        text-align: justify;
-
-        &.box-txt {
-            margin-bottom: 10px;
-        }
-    }
 `;
 
 const ProjectsBox = styled.a`
@@ -85,6 +69,10 @@ const ProjectsBox = styled.a`
 `;
 
 const ContactBox = styled.div`
+    div {
+        overflow: hidden;
+    }
+    
     p, div a {
         font-size: 0.32rem;
     }

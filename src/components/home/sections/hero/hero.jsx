@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { setSection } from "../../../../reducers/sectionReducer"
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSection } from "../../../../reducers/sectionReducer";
+import { selectMode } from "../../../../reducers/modeReducer";
+
+import Circle from "../circle"
 
 function Hero() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const modeSelector = useSelector(selectMode)
 
     useEffect(() => {
         let obsFunc = entries => {
@@ -25,11 +30,13 @@ function Hero() {
     }, []);
 
     return(
-        <StyledHero>
-            <div id="hero-section">
-                <h1>LUCAS<br/>HILDEVER</h1>
-                <p>I'm a Web Developer & <br/>Designer based in Brazil.</p>
-            </div>
+        <StyledHero id="hero-section">
+            <p 
+                className={modeSelector ? "light" : ""}
+            >
+                Hello, i'm Lucas Hildever, a<br/> frontend developer & designer<br/> based on brazil_
+            </p>
+            <Circle absolute />
         </StyledHero>
     )
 }
@@ -39,18 +46,14 @@ const StyledHero = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
-    div {
-        width: 47.5vw;
+    p {
+        font-weight: 800;
+        z-index: 2;
 
-        h1 {
-            text-indent: -4px;
-            overflow: visible;
-        }
-
-        p {
-            text-indent: -2px;
-            transform: translateX(4px);
+        &.light {
+            color: #181818;
         }
     }
 `;

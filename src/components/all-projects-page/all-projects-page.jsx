@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setProjData, selectProjData } from "../../reducers/projectsDataReducer";
-
 import { setPage, selectPage } from "../../reducers/pageReducer";
 
 import ProjDiv from "../proj-div/proj-div";
 
-// router imports
-import { useLocation } from "react-router-dom";
-
-
-
 function AllProjectsPage() {
 
+    const [projectData, setProjectData] = useState([])
+
     const location = useLocation()
-    
-    const projectData = useSelector(selectProjData)
 
     const pageSelector = useSelector(selectPage)
 
@@ -27,7 +20,7 @@ function AllProjectsPage() {
         fetch('https://magenta-soap-production.up.railway.app/')
             .then((response) => response.json())
             .then((data) => {
-                dispatch(setProjData(data.data.allProjects))
+                setProjectData(data.data.allProjects)
             })
             .catch(err => console.log(err))
     }, [])

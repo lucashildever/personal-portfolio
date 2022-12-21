@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { setProjData, selectProjData } from "../../../../reducers/projectsDataReducer";
+import { useDispatch } from "react-redux";
 import { setSection } from "../../../../reducers/sectionReducer";
 
 import ProjDiv from "../../../proj-div/proj-div";
 
 function ProjectsSection() {
 
-    const projectData = useSelector(selectProjData)
+    const [projectData, setProjectData] = useState([])
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -32,7 +31,7 @@ function ProjectsSection() {
         fetch('https://magenta-soap-production.up.railway.app/')
             .then((response) => response.json())
             .then((data) => {
-                dispatch(setProjData(data.data.allProjects))
+                setProjectData(data.data.allProjects)
             })
             .catch(err => console.log(err))
     }, [])
