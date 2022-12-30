@@ -12,10 +12,10 @@ function Layout() {
   const mode = useSelector(selectMode)
 
   return(
-  <MyLayout className={mode ? "light" : "dark"} >
-    <Icons />
-    <Outlet />
-  </MyLayout>
+    <MyLayout className={mode ? "light" : "dark"} >
+      <Icons />
+      <Outlet />
+    </MyLayout>
   )
 }
 

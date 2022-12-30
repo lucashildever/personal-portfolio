@@ -8,6 +8,8 @@ function Menu() {
     
     const [menu, setMenu] = useState(false);
 
+    const [lang, setLang] = useState(false)
+
     const mode = useSelector(selectMode);
 
     return (
@@ -20,30 +22,29 @@ function Menu() {
                 <div></div>
                 <div></div>
             </Bmenu>
-            <OpenMenu className={menu ? "" : "menu-disable"}>
-                <div>
+            <OpenMenu className={`${menu ? "" : "menu-disable"} ${mode ? "light" : ""}`}>
+                <div className="menu-content">
                     <h3>Language</h3>
-                    <SquareRadio htmlFor="muhRadio4">
-                        <label>
-                            <input 
-                                type="radio" 
-                                name="muhRadio" 
-                                value=""
-                                defaultChecked
-                            />
-                                English
-                        </label>
-                    </SquareRadio>
-                    <SquareRadio htmlFor="muhRadio4">
-                        <label>
-                            <input 
-                                type="radio" 
-                                name="muhRadio" 
-                                value=""
-                            />
-                                Portuguese
-                        </label>
-                    </SquareRadio>
+                    <SquareRadios className={`${mode ? "light" : ""}`}>
+                        <div 
+                            onClick={() => {
+                                if(!lang)
+                                    setLang(!lang)
+                                }}
+                        >
+                            <input className={lang ? "active-op" : ""} name="english" type="radio" value="" defaultChecked />
+                            <label for="english">English</label>
+                        </div>
+                        <div 
+                            onClick={() => {
+                                if(lang)
+                                    setLang(!lang)
+                                }}
+                        >
+                            <input className={lang ? "" : "active-op"} name="portuguese" type="radio" value=""/>
+                            <label for="portuguese">Portuguese</label>
+                        </div>
+                    </SquareRadios>
                 </div>
             </OpenMenu>
         </>
@@ -52,8 +53,8 @@ function Menu() {
 
 const Bmenu = styled.div`
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 16px;
+    right: 13px;
     cursor: pointer;
     opacity: 0.6;
     width: 25px;
@@ -97,8 +98,10 @@ const Bmenu = styled.div`
         }
     }
 
-    &.light div {
-        background-color: #232323;
+    &.light {
+        div {
+            background-color: #232323;
+        }
     }
 `;
 
@@ -147,28 +150,84 @@ const OpenMenu = styled.div`
             }
         }
     }
-`;
 
-const SquareRadio = styled.label`
-    label {
-        cursor: pointer;
+    &.light {
+        div.menu-content h3 {
+            color: #232323;
+        }
     }
 
-    input[type=radio] {
-        border: 2px solid #fff;
+    //responsive
+    @media screen and (max-width: 900px) {
+        & > div {
+            width: 300px;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        & > div {
+            width: calc(100vw - 20px);
+        }
+
+        div h3 {
+            font-size: 8vw;
+        }
+    }
+`;
+
+const SquareRadios = styled.form`
+    div label {
+        cursor: pointer;
+        line-height: 24px;
+    }
+
+    div input[type=radio] {
+        border: 2px solid #D9D9D9;
         padding: 5px;
         -webkit-appearance: none;
         margin-right: 8px;
     }
 
-    input[type=radio]:checked {
-        background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
-        background-size: 6px 6px;
+    div input[type=radio].active-op::after {
+        content: "";
+        position: absolute;
+        opacity: 1;
+        width: 6px;
+        height: 6px;
+        transform: translate(-4px, -4px);
+        background-color: #D9D9D9;
+    }
+
+    /* div input[type=radio]:not(:checked)::after {
+        opacity: 0;
+    } */
+
+    /* 
+
+    
+
+    input[type=radio]:checked ~ input[type=radio]::after {
+        opacity: 1;
     }
 
     input[type=radio]:focus {
         outline-color: transparent;
     }
+
+    &.light {
+        label {
+            color: #232323;
+        }
+
+        input[type=radio] {
+            border: 2px solid #232323;
+        }
+
+        input[type=radio]:checked ~ input[type=radio]:after {
+            background-color: #232323;
+        }
+    } */
+
 `;
 
 export default Menu;

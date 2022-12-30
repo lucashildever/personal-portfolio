@@ -63,6 +63,9 @@ const StyledProjItem = styled.div`
         }
     }
 
+    @media screen and (max-width: 650px) {
+        aspect-ratio: 1 / 1;
+    }
 `;
 
 export default ProjDiv;

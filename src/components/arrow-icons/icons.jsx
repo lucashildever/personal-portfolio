@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export function Arrow() {
     return (
@@ -10,8 +11,13 @@ export function Arrow() {
 
 export function SecondArrow() {
     return (
-        <svg style={{transform: "translateY(5px)"}} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <StyledSecondArrow width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.87397 5.05674L11.0704 3.86031L17.8035 4.63672L18.5671 11.3825L17.3834 12.5662L16.7852 7.08048C16.7767 7.00411 16.7683 6.92774 16.7598 6.85137C16.7598 6.76652 16.7555 6.67743 16.747 6.58409L5.08827 18.2429L4.19732 17.3519L15.8434 5.70586C15.75 5.69738 15.6567 5.68889 15.5633 5.68041C15.47 5.67192 15.3682 5.66344 15.2579 5.65495L9.87397 5.05674Z" fill="white"/>
-        </svg>
+        </StyledSecondArrow>
     )
 }
+
+const StyledSecondArrow = styled.svg`
+    transform: translate(5px, 1px);
+    position: absolute;
+`;

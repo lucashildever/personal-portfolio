@@ -34,9 +34,9 @@ function Hero() {
             <p 
                 className={modeSelector ? "light" : ""}
             >
-                Hello, i'm Lucas Hildever, a<br/> frontend developer & designer<br/> based on brazil_
+                Hello, i'm Lucas Hildever, <br/>a web developer & designer<br/> based in brazil_
             </p>
-            <Circle absolute />
+            <Circle className="hero-circle" />
         </StyledHero>
     )
 }
@@ -50,10 +50,16 @@ const StyledHero = styled.section`
 
     p {
         font-weight: 800;
-        z-index: 2;
+        z-index: 1;
 
         &.light {
             color: #181818;
+        }
+    }
+
+    @media screen and (max-width: 330px) {
+        p {
+            font-size: 6vw;
         }
     }
 `;

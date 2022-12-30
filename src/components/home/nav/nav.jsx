@@ -34,7 +34,7 @@ function Nav() {
 const StyledNav = styled.div`
     position: fixed;
     top: 40px;
-    right: 25px;
+    right: 17px;
     z-index: 1;
     
     ul {
@@ -65,6 +65,12 @@ const StyledNav = styled.div`
     &.light {
         ul a li {
             color: #232323;
+        }
+    }
+
+    @media screen and (max-width: 330px) {
+        ul a li {
+            font-size: 6vw;
         }
     }
 `;

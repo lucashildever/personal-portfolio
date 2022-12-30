@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setPage, selectPage } from "../../reducers/pageReducer";
+import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+import { selectMode } from "../../reducers/modeReducer"
 
 import ProjDiv from "../proj-div/proj-div";
 
 function AllProjectsPage() {
 
-    const [projectData, setProjectData] = useState([])
+    const [projectData, setProjectData] = useState([]);
 
-    const location = useLocation()
-
-    const pageSelector = useSelector(selectPage)
-
-    const dispatch = useDispatch()
+    const mode = useSelector(selectMode)
 
     useEffect(() => {
-        fetch('https://magenta-soap-production.up.railway.app/')
+        //fetch('https://magenta-soap-production.up.railway.app/')
+        fetch('http://localhost:5555/')
             .then((response) => response.json())
             .then((data) => {
                 setProjectData(data.data.allProjects)
@@ -25,20 +23,10 @@ function AllProjectsPage() {
             .catch(err => console.log(err))
     }, [])
 
-    useEffect(() => {
-        if (location.pathname === "/projects") {
-            dispatch(setPage("projects"))
-        }
-    }, [location])
-
-    useEffect(() => {
-        console.log(pageSelector)
-    }, [pageSelector])
-
     return(
         <PageContent>
-            <div className="page-content">
-                <PathLinks>
+            <div className={`page-content ${mode ? "light" : ""}`}> 
+                <PathLinks className="menu-texts">
                     <Link to="/"><p>Home</p></Link>
                     <p>{" > Projects"}</p>
                 </PathLinks>
@@ -49,7 +37,8 @@ function AllProjectsPage() {
                                 <ProjDiv 
                                     title={item.title} 
                                     key={index} 
-                                    image={item.img} 
+                                    // image={item.img} 
+                                    image={""} 
                                     projType={item.projType}
                                     linkTo={index}
                                 />
@@ -73,7 +62,25 @@ const PageContent = styled.div`
             padding-top: 30px;
             padding-bottom: 40px;
         }
+
+        &.light div.menu-texts {
+            p, a p {
+                color: #181818;
+            }
+
+            a:hover {
+                text-decoration: underline #181818 2px;
+            }
+        }
+
+        &.light {
+            h2 {
+                color: #181818;
+            }
+        }
     }
+
+    
 `;
 
 const PathLinks = styled.div`
@@ -100,6 +107,14 @@ const AllProjs = styled.div`
     div {
         background-color: #afafaf;
         aspect-ratio: 1;
+    }
+
+    @media screen and (max-width: 750px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 490px) {
+        grid-template-columns: 1fr;
     }
 `;
 

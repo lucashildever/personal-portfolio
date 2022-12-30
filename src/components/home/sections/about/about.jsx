@@ -75,7 +75,30 @@ const AboutStyled = styled.section`
             width: 100px;
             filter: grayscale(100%);
         }
+    }
 
+    @media screen and (max-width: 900px) {
+        div.aboutContent {
+            width: 43vw;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        div.aboutContent {
+            width: 60vw;
+        }
+    }
+
+    @media screen and (max-width: 350px) {
+        div.aboutContent {
+            width: 77vw;
+        }
+    }
+
+    @media screen and (max-width: 330px) {
+        div p {
+            font-size: 6vw;
+        }
     }
 `;
 

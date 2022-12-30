@@ -1,9 +1,14 @@
 import React, { useEffect ,useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { selectMode } from "../../reducers/modeReducer";
+
 import styled from "styled-components";
 
 function ProjectPage() {
+
+    const mode = useSelector(selectMode);
 
     const projectId = useParams().projectId
     const [projectData, setProjectData] = useState({
@@ -13,10 +18,11 @@ function ProjectPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('https://magenta-soap-production.up.railway.app/')
+        //fetch('https://magenta-soap-production.up.railway.app/')
+        fetch('http://localhost:5555/')
             .then((response) => response.json())
             .then((data) => {
-                if (projectId > Object.keys(data.data.allProjects).length) {
+                if (projectId > Object.keys(data.data.allProjects).length || projectId <= 0) {
                     navigate("/projects/project-not-found")
                 }
                 setProjectData(data.data.allProjects[projectId - 1])
@@ -30,8 +36,8 @@ function ProjectPage() {
     
     return(
         <StyledProject>
-            <div className="project-page">
-                <PathLinks>
+            <div className={`project-page ${mode ? "light" : ""}`}>
+                <PathLinks className="path-links">
                     <Link to="/"><p>Home</p></Link>
                     <p className="greater-than">&gt;</p>
                     <Link to="/projects"><p>Projects</p></Link>
@@ -40,7 +46,6 @@ function ProjectPage() {
                 </PathLinks>
                 <div className="title-buttons">
                     <h2>{projectData.title}</h2>
-
                 </div>
                 <div className="project-image"></div>
                 <p>{projectData.desc}</p>
@@ -67,7 +72,7 @@ const StyledProject = styled.div`
         div.project-image {
             width: 100%;
             background-color: grey;
-            height: 450px;
+            aspect-ratio: 2/1.5;
         }
         
         & > p {
@@ -76,6 +81,22 @@ const StyledProject = styled.div`
         }
     }
 
+    div.light {
+        div.path-links {
+            p, a p {
+                color: #181818;
+            }
+        }
+        p, div.title-buttons h2 {
+            color: #181818;
+        }
+    }
+
+    @media screen and (max-width: 360px){
+        div.project-page > p, div.title-buttons h2 {
+            font-size: 6vw;
+        } 
+    }
 `;
 
 const PathLinks = styled.div`
@@ -86,9 +107,15 @@ const PathLinks = styled.div`
         padding-right: 12px;
     }
 
-    a:nth-child(1):hover,  a:nth-child(3):hover{
+    a:nth-child(1):hover, a:nth-child(3):hover{
         cursor: pointer;
         text-decoration: underline white 2px;
+    }
+
+    @media screen and (max-width: 400px){
+        p, a {
+            font-size: 6vw;
+        } 
     }
 `;
 

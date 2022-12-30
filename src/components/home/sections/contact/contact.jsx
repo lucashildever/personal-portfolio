@@ -9,14 +9,14 @@ import Circle from "../circle"
 
 function Contact() {
 
-    const dispatch = useDispatch()
-    const mode = useSelector(selectMode)
+    const dispatch = useDispatch();
+    const mode = useSelector(selectMode);
 
     useEffect(() => {
         let obsFunc = entries => {
             entries.forEach((entry) => {
                 if(entry.isIntersecting)
-                        dispatch(setSection("contact"))
+                        dispatch(setSection("contact"));
             });
         };
 
@@ -35,7 +35,6 @@ function Contact() {
             <div className={`form-content ${mode ? "light" : ""}`}>
                 <h2>Working on a project? <br/>Let’s have a coffe!</h2>
                 <ContactForm id="contact-form">
-
                     <div className="form-item">
                         <input type="text" id="f-name" name="f-name" required/>
                         <label className="name-label" htmlFor="f-name">Name</label>
@@ -48,7 +47,6 @@ function Contact() {
                         <input type="textarea" id="f-message" name="f-message" required/>
                         <label className="email-label" htmlFor="f-email">Message</label>
                     </div>
-
                 </ContactForm>
                 <div className="send-button">
                     <button>Send <ArrowSvg /></button>
@@ -77,9 +75,12 @@ const StyledContact = styled.div`
         height: 70px;
         width: 400px;
         overflow: hidden;
+        position: relative;
 
         & > div {
-            transform: translate(240px, -25px);
+            right: -25px;
+            top: -10px;
+            scale: 1.2;
         }
     }
 
@@ -90,30 +91,29 @@ const StyledContact = styled.div`
         h2 {
             color: #232323;
         }
-    }
 
-    div.light {
-        background-color: #232323;
+        &.light  {
+            background-color: #232323;
 
-        h2 {
-            color: #D9D9D9;
-        }
-
-        form {
-            div.form-item label {
+            h2 {
                 color: #D9D9D9;
             }
-            div.form-item input {
+
+            form div.form-item label {
+                color: #D9D9D9;
+            }
+            
+            form div.form-item input {
                 border-bottom: #D9D9D9 solid 2px;
 
                 &[type="text"], &[type="textarea"] {
                     color: #D9D9D9;
                 }
             }
-        }
 
-        div.send-button button {
-            color: #D9D9D9;
+            div.send-button button {
+                color: #D9D9D9;
+            }
         }
     }
 
@@ -134,6 +134,19 @@ const StyledContact = styled.div`
         }
     }
 
+    @media screen and (max-width: 530px) {
+        width: 76vw;
+    }
+
+    @media screen and (max-width: 440px) {
+        div.form-content {
+            h2 {
+                font-size: 0.39rem;
+                text-align: center;
+            }
+        }
+    }
+
 `;
 
 const ContactForm = styled.form`
@@ -147,12 +160,13 @@ const ContactForm = styled.form`
             position: absolute;
             color: #232323;
             transition: 0.4s;
-            transform: translate(-348px, 30px);
+            left: 0px;
+            bottom: 2px;
         }
 
         input:focus + label, input:valid + label {
             transition: 0.4s;
-            transform: translate(-348px, 5px);
+            bottom: 33px;
             opacity: 0.6;
         }
 
@@ -165,11 +179,12 @@ const ContactForm = styled.form`
             &[type="text"], &[type="textarea"] {
                 min-width: 100%;
                 font-size: 0.38rem;
-                padding: 4px;
+                padding-left: 1px;
                 color: #232323;
             }
         } 
     }
+
 `;
 
 export default Contact;

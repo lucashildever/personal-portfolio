@@ -1,42 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
-export default function Circle({ absolute }) {
-    const [circle, setCircle] = useState({})
+import { useSelector } from "react-redux";
+import { selectMode } from "../../../reducers/modeReducer";
 
-    useEffect(() => {
-        setInterval(()=> {
-            const first = Math.floor(Math.random() * 80) + 40;
-            const second = Math.floor(Math.random() * 80) + 40;
-            const third = Math.floor(Math.random() * 80) + 40;
-            const fourth = Math.floor(Math.random() * 80) + 40;
-            setCircle({
-                "first": first,
-                "second": second,
-                "third": third,
-                "fourth": fourth
-            })
-        }, 3000)   
-    },[])
+export default function Circle() {
 
-    return <MyCircle circle={circle} absolute={absolute} className="circle"></MyCircle>
+    const mode = useSelector(selectMode);
+
+    return <MyCircle className={mode ? "light" : ""}></MyCircle>
 }
 
 const MyCircle = styled.div`
     z-index: 1;
     height: 200px;
     width: 200px;
-    ${({ absolute }) => absolute ? "position: absolute;" : ""}
+    position: absolute;
 
     background: 
-        radial-gradient(74.21% 73.53% at 64.51% 26.64%, 
-        rgba(190, 190, 190, 0.6) 0%, 
-        rgba(217, 217, 217, 0.402037) 38.54%, 
-        rgba(217, 217, 217, 0) 89.58%);
+        radial-gradient(78.38% 82.01% at 82.71% 5.14%, 
+            rgba(217, 217, 217, 0.7) 0%, 
+            rgba(217, 217, 217, 0.35) 52.17%, 
+            rgba(217, 217, 217, 0) 100%);
 
-    border-radius: 50% 50% 50% 50%;
+    border-radius: 50%;
 
-    border-radius: ${({ circle }) => 
-        circle.first + "%" + circle.second + "%" + circle.third + "%" + circle.fourth + "%"};
-    transition: 7s ease-out;
+    &.light {
+        background: 
+            radial-gradient(78.38% 82.01% at 82.71% 5.14%, 
+                rgba(0, 0, 0, 0.7) 0%, 
+                rgba(0, 0, 0, 0.35) 52.17%, 
+                rgba(0, 0, 0, 0) 100%);
+    }
+
 `;

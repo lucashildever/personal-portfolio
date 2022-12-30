@@ -10,7 +10,7 @@ const BoxContent = ({ section }) => {
             return (
                 <AboutBox href="/" target='_blank' rel="noopener noreferrer">
                     <p className="box-txt">
-                        Check out my cv for more <br/> detailed information <SecondArrow />
+                        Check out my cv <br/>for more detailed <br/>information <SecondArrow />
                     </p>
                 </AboutBox>
             )
@@ -56,6 +56,17 @@ const AboutBox = styled.div`
     cursor: pointer;
     & > p {
         font-size: 0.32rem;
+        text-align: justify;
+        line-height: 23px;
+    }
+
+    @media screen and (max-width: 550px) {
+        display: flex;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 450px) {
+        min-width: 50vw;
     }
 
 `;
